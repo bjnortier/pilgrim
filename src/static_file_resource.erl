@@ -31,6 +31,8 @@ file_path(Context, Name) ->
     end,
     filename:join([Context#context.root, RelName]).
 
+file_exists(_Context, []) ->
+    false;
 file_exists(Context, Name) ->
     NamePath = file_path(Context, Name),
     case filelib:is_regular(NamePath) of 
