@@ -1,4 +1,4 @@
 deps/
-ebin/*.beam
+ebin/
 .DS_Store
 priv/log/
