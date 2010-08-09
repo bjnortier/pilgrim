@@ -3,3 +3,5 @@ ebin/
 .DS_Store
 priv/log/
 .gitignore~
+.eunit/
+
