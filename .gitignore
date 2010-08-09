@@ -1,0 +1,3 @@
+deps/
+ebin/*.beam
+.DS_Store
