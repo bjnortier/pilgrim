@@ -72,56 +72,6 @@ content_types_provided(ReqData, Context) ->
     {[{CT, provide_content}], ReqData,
      Context#context{metadata=[{'content-type', CT}|Context#context.metadata]}}.
 
-%% content_types_accepted(ReqData, Context) ->
-%%     CT = case wrq:get_req_header("content-type", ReqData) of
-%%              undefined -> "application/octet-stream";
-%%              X -> X
-%%          end,
-%%     {MT, _Params} = webmachine_util:media_type_to_detail(CT),
-%%     {[{MT, accept_content}], ReqData,
-%%      Context#context{metadata=[{'content-type', MT}|Context#context.metadata]}}.
-
-%% accept_content(ReqData, Context) ->
-%%     Path = wrq:disp_path(ReqData),
-%%     FP = file_path(Context, Path),
-%%     ok = filelib:ensure_dir(filename:dirname(FP)),
-%%     ReqData1 = case file_exists(Context, Path) of 
-%%         {true, _} ->
-%%             ReqData;
-%%         _ ->
-%%             LOC = "http://" ++
-%%                    wrq:get_req_header("host", ReqData) ++
-%%                    "/fs/" ++ Path,
-%%             wrq:set_resp_header("Location", LOC, ReqData)
-%%     end,
-%%     Value = wrq:req_body(ReqData1),
-%%     case file:write_file(FP, Value) of
-%%         ok ->
-%%             {true, wrq:set_resp_body(Value, ReqData1), Context};
-%%         Err ->
-%%             {{error, Err}, ReqData1, Context}
-%%     end.    
-
-%% post_is_create(ReqData, Context) ->
-%%     {true, ReqData, Context}.
-
-%% create_path(ReqData, Context) ->
-%%     case wrq:get_req_header("slug", ReqData) of
-%%         undefined -> {undefined, ReqData, Context};
-%%         Slug ->
-%%             case file_exists(Context, Slug) of
-%%                 {true, _} -> {undefined, ReqData, Context};
-%%                 _ -> {Slug, ReqData, Context}
-%%             end
-%%     end.
-
-%% delete_resource(ReqData, Context) ->
-%%     case file:delete(file_path(
-%%                        Context, wrq:disp_path(ReqData))) of
-%%         ok -> {true, ReqData, Context};
-%%         _ -> {false, ReqData, Context}
-%%     end.
-
 provide_content(ReqData, Context) ->
     case maybe_fetch_object(Context, wrq:disp_path(ReqData)) of 
         {true, NewContext} ->
