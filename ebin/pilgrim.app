@@ -1,0 +1,22 @@
+%%-*- mode: erlang -*-
+{application, pilgrim,
+ [
+  {description, "pilgrim"},
+  {vsn, "1"},
+  {modules, [
+             pilgrim,
+             pilgrim_app,
+             pilgrim_sup,
+             pilgrim_resource
+            ]},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  crypto,
+                  mochiweb,
+                  webmachine
+                 ]},
+  {mod, { pilgrim_app, []}},
+  {env, []}
+ ]}.
