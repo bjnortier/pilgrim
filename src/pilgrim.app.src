@@ -18,5 +18,5 @@
                   webmachine
                  ]},
   {mod, { pilgrim_app, []}},
-  {env, []}
+  {env, [{port, 8888}]}
  ]}.
